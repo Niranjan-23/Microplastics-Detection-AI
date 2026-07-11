@@ -179,7 +179,7 @@ export const detectMicroplastics = async (base64Image, imageDetails = { width: 1
     };
 
     let targetUrl = WORKFLOW_URL;
-    if (targetUrl && targetUrl.startsWith('https://serverless.roboflow.com')) {
+    if (import.meta.env.DEV && targetUrl && targetUrl.startsWith('https://serverless.roboflow.com')) {
       targetUrl = targetUrl.replace('https://serverless.roboflow.com', '/api-roboflow');
       console.log('[Microplastics System] Routing request through Vite proxy:', targetUrl);
     }

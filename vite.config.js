@@ -13,4 +13,13 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    proxy: {
+      '/api-roboflow': {
+        target: 'https://serverless.roboflow.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-roboflow/, ''),
+      },
+    },
+  },
 })

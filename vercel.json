@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api-roboflow/:path*",
+      "destination": "https://serverless.roboflow.com/:path*"
+    }
+  ]
+}

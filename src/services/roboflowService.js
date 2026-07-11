@@ -179,17 +179,11 @@ export const detectMicroplastics = async (base64Image, imageDetails = { width: 1
     };
 
     let targetUrl = WORKFLOW_URL;
-    const isLocalhost = typeof window !== 'undefined' && 
-      (window.location.hostname === 'localhost' || 
-       window.location.hostname === '127.0.0.1' || 
-       window.location.hostname === '[::1]' ||
-       window.location.hostname.startsWith('192.168.') ||
-       window.location.hostname.startsWith('10.') ||
-       window.location.hostname.startsWith('172.'));
+    const isBrowser = typeof window !== 'undefined';
 
-    if ((import.meta.env.DEV || isLocalhost) && targetUrl && targetUrl.startsWith('https://serverless.roboflow.com')) {
+    if (isBrowser && targetUrl && targetUrl.startsWith('https://serverless.roboflow.com')) {
       targetUrl = targetUrl.replace('https://serverless.roboflow.com', '/api-roboflow');
-      console.log('[Microplastics System] Routing request through Vite proxy:', targetUrl);
+      console.log('[Microplastics System] Routing request through proxy:', targetUrl);
     }
 
     const response = await axios.post(targetUrl, payload, {
